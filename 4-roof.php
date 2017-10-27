@@ -1,17 +1,31 @@
 <?php
-//$roof = array(2, 5, 1, 2, 3, 7, 7, 6); //требуемый набор цифр
+//$roof = array(1, 4, 2, 7, 5, 7, 1, 4, 9); //требуемый набор цифр
 for ($i = 0; $i < 9; $i++)	{$roof[] = rand(1, 9);} // случайный набор цифр
-
+$roofLess = $roof;
+array_shift($roofLess);
+array_pop($roofLess);
 $kol = count($roof);
 for ($i = 0; $i < $kol; $i++)
 {
 print "$roof[$i] ";
 }
 $left = 0; //первый  элемент крыши
-$right = $kol-1; // последний элемент крыши
-$max = max($roof);
-$leftmax = $roof[$left];
-$rightmax = $roof[$right];
+$right = $kol - 1; // последний элемент крыши
+$max = max($roofLess);
+if ($roof[$left] > $max)
+{
+	$leftmax = $max;
+}
+else {
+	$leftmax = $roof[$left];
+}
+if ($roof[$right] > $max)
+{
+	$rightmax = $max;
+}
+else {
+	$rightmax = $roof[$right];
+}
 $size = 0;
 while ($leftmax < $max) {
 	$left++;
@@ -34,9 +48,10 @@ while ($rightmax < $max)
 		$size += $rightmax - $roof[$right];
 	}
 }
+
 while ($left != $right)
 {
 	$size += $leftmax - $roof[$left];
 	$left++;
 }
-print "Объем воды в крыше = $size";
+print "<br>Объем воды в крыше = $size";
